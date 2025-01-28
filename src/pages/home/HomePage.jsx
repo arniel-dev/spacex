@@ -52,7 +52,13 @@ const HomePage = () => {
     );
 
   return (
-    <div style={{ padding: "16px", width: "80vw", margin: "0 auto" }}>
+    <div
+      style={{
+        padding: "16px",
+        width: "80vw",
+        margin: "0 auto",
+      }}
+    >
       <Typography variant="h4" gutterBottom>
         SpaceX Launches
       </Typography>

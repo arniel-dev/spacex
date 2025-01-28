@@ -1,15 +1,14 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
-import { Button, Collapse, Typography, Box } from "@mui/material";
+import { Button, Collapse, Typography, Box, Link } from "@mui/material";
 
 const ViewHideDetails = ({ data }) => {
-  // State to toggle visibility of the details
   const [showDetails, setShowDetails] = useState(false);
 
-  // Function to handle the toggle action
   const toggleDetails = () => {
     setShowDetails(!showDetails);
   };
+  const showVideoLink = !!data.links.video_link;
 
   return (
     <Box
@@ -20,18 +19,23 @@ const ViewHideDetails = ({ data }) => {
         flexDirection: "column",
       }}
     >
-      {/* Button to toggle details */}
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={toggleDetails}
-        sx={{ marginBottom: 2, width: 20 }}
-      >
-        {showDetails ? "Hide" : "View"}
-      </Button>
-
-      {/* Collapse component to show/hide the details */}
       <Collapse in={showDetails}>
+        <div style={{ display: "flex", marginBottom: "8px" }}>
+          <span>{`text hour | `}</span>
+          <Link
+            href={data?.links.video_link}
+            underline="none"
+            style={{
+              display: showVideoLink ? "inline" : "none",
+              marginLeft: 4,
+            }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Video
+          </Link>
+        </div>
+
         <Box
           sx={{
             backgroundColor: "#f5f5f5",
@@ -43,6 +47,15 @@ const ViewHideDetails = ({ data }) => {
           <Typography variant="body1">{data?.details}</Typography>
         </Box>
       </Collapse>
+
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={toggleDetails}
+        sx={{ marginTop: 2, width: 20 }}
+      >
+        {showDetails ? "Hide" : "View"}
+      </Button>
     </Box>
   );
 };
