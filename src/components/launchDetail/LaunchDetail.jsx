@@ -6,8 +6,6 @@ import Typography from "@mui/material/Typography";
 import { Chip } from "@mui/material";
 import ViewHideDetails from "../viewDetail/ViewHideDetails";
 function LaunchDetail({ data = [] }) {
-  const [showDetail, setShowDetails] = useState(false);
-
   return (
     <div
       style={{
@@ -49,7 +47,7 @@ function handleChipStatusLabel(data) {
     return "upcoming";
   }
   if (!launch_success && !upcoming) {
-    return "fail";
+    return "failed";
   }
   return "";
 }

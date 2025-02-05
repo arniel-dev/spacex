@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { Button, Collapse, Typography, Box, Link } from "@mui/material";
+import { timeSinceLaunch } from "../../utils/utils";
 
 const ViewHideDetails = ({ data }) => {
   const [showDetails, setShowDetails] = useState(false);
@@ -9,7 +10,7 @@ const ViewHideDetails = ({ data }) => {
     setShowDetails(!showDetails);
   };
   const showVideoLink = !!data.links.video_link;
-
+  const showArticleLink = !!data.links.article_link;
   return (
     <Box
       sx={{
@@ -21,19 +22,41 @@ const ViewHideDetails = ({ data }) => {
     >
       <Collapse in={showDetails}>
         <div style={{ display: "flex", marginBottom: "8px" }}>
-          <span>{`text hour | `}</span>
-          <Link
-            href={data?.links.video_link}
-            underline="none"
-            style={{
-              display: showVideoLink ? "inline" : "none",
-              marginLeft: 4,
-            }}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Video
-          </Link>
+          <span>{timeSinceLaunch(data?.launch_date_utc)}</span>
+          {showArticleLink && (
+            <span style={{ marginLeft: 4 }}>
+              {"|"}
+              <Link
+                href={data?.links.article_link}
+                underline="none"
+                style={{
+                  display: "inline",
+                  marginLeft: 4,
+                }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Article
+              </Link>
+            </span>
+          )}
+          {showVideoLink && (
+            <span style={{ marginLeft: 4 }}>
+              {"|"}
+              <Link
+                href={data?.links.video_link}
+                underline="none"
+                style={{
+                  display: "inline",
+                  marginLeft: 4,
+                }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Video
+              </Link>
+            </span>
+          )}
         </div>
 
         <Box

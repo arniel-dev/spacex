@@ -63,11 +63,9 @@ const HomePage = () => {
         SpaceX Launches
       </Typography>
       <Search value={searchTerm} setFunction={setSearchTerm} />
-
-      <Loading isLoading={isLoading} />
       <ShowError isError={isError} message={error?.message} />
       <LaunchDetail data={filteredLaunches} />
-      <Loading isLoading={isFetchingNextPage} />
+      <Loading isLoading={isLoading || isFetchingNextPage} />
 
       {!hasNextPage && !isLoading && (
         <Typography
